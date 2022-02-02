@@ -1,0 +1,88 @@
+version: '2'
+
+volumes:
+  site:
+  db:
+    driver: local
+
+
+services:
+    php:
+        build: docker/php
+        container_name: php
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:9000:9000'
+        links:
+            - db
+            - memcached
+        environment:
+            XDEBUG_CONFIG: ${XDEBUG_CONFIG}
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+
+        networks:
+            - bitrix
+        restart: always
+    web_server:
+        build: docker/nginx
+        container_name: webserver
+        depends_on:
+            - source
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:8181:80'
+            - '${INTERFACE}:4431:443'
+        links:
+            - php
+        networks: 
+            - bitrix
+        restart: always
+    db:
+        build: docker/mysql
+        container_name: db
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:9306:3306'
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        command: mysqld --sql-mode=""
+        networks:
+            - bitrix
+        restart: always
+    memcached:
+        image: memcached:1.5-alpine
+        container_name: memcached
+        volumes_from:
+            - source
+        ports:
+            - '${INTERFACE}:9211:11211'
+        networks:
+            - bitrix
+        restart: always
+    source:
+        image: alpine:latest
+        container_name: source
+        volumes:
+            - ./docker/logs/nginx:/var/log/nginx
+            - ./docker/logs/php:/var/log/php
+            - ./docker/logs/db:/var/log/mysql
+            - ./docker/logs/memcached:/var/log/memcached
+            - ./docker/data/db:/var/lib/mysql
+            - ./docker/data/memcached:/var/lib/memcached
+            - ./:/var/www/bitrix
+            - ./docker/logs/xhprof:/var/www/bitrix/docker/logs/xhprof
+        networks:
+            - bitrix
+networks:
+    bitrix:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.111.0.0/24

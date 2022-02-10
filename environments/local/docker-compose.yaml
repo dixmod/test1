@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  php:
+    build:
+      ./php
+    ports:
+      - 18080:8080
+    volumes:
+      - ../../:/var/www
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: mysql_1
+      DATABASE_HOST: mysql_1
+      DATABASE_LOGIN: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: test1
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - ../../../temp/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test1
+

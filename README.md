@@ -36,3 +36,13 @@
            "test1", "test2", 
        ] 
     }
+
+# Локальное окружение
+> docker-compose -f environments/local/docker-compose.yaml up -d --build
+
+> docker-compose -f environments/local/docker-compose.yaml stop
+
+> docker exec -it local_php_1 bash
+
+> composer install --ignore-platform-reqs
+

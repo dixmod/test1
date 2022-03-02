@@ -6,7 +6,7 @@ namespace App\Service\Book;
 
 use App\Dto\Request\Author\AuthorCreateDto;
 use App\Dto\Request\Book\BookCreateDto;
-use App\Dto\Response\BookDto;
+use App\Dto\Response\Book\BookDto;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Factory\Response\BookFactory;

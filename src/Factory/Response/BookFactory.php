@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory\Response;
 
-use App\Dto\Response\BookDto;
+use App\Dto\Response\Book\BookDto;
 use App\Entity\Book;
 use Doctrine\Common\Collections\Collection;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Factory\Response;
 
-use App\Dto\Response\AuthorDto;
+use App\Dto\Response\Author\AuthorDto;
 use App\Entity\Author;
 use App\Factory\Response\AuthorFactory;
 use Generator;

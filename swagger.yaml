@@ -1,0 +1,138 @@
+openapi: 3.0.0
+info:
+  title: 'Order API'
+  description: 'Описание API Test1'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://test1.dixmod.ru'
+    description: stable
+  -
+    url: 'http://test2.dixmod.ru'
+    description: testing
+paths:
+  /author/create:
+    post:
+      tags:
+        - Author
+      summary: 'Создать автора'
+      operationId: AuthorCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorCreateDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorDto'
+  /book/create:
+    post:
+      tags:
+        - Book
+      summary: 'Создать книгу'
+      operationId: BookCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookCreateDto'
+      responses:
+        '200':
+          description: 'Returns the rewards of an user'
+  /book/search:
+    post:
+      tags:
+        - Book
+      summary: 'Поиск книги'
+      operationId: BookSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookSearchDto'
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    AuthorCreateDto:
+      required:
+        - name
+      properties:
+        name:
+          description: 'Имя автора'
+          type: string
+          maxLength: 255
+          example: 'Пушкин Александ Сергеевич'
+      type: object
+    AuthorDto:
+      properties:
+        id:
+          description: 'Идендификатор автора'
+          type: integer
+          example: '1'
+        name:
+          description: 'Имя автора'
+          type: string
+          example: 'Пушкин Александ Сергеевич'
+      type: object
+    BookCreateDto:
+      required:
+        - title
+        - authors
+      properties:
+        title:
+          description: 'Название автора'
+          type: string
+          maxLength: 255
+          example: 'Руслан и Людмила'
+        authors:
+          description: Авторы
+          type: array
+          items:
+            type: string
+          minItems: 1
+          example:
+            - 'Пушкин Александ Сергеевич'
+      type: object
+    BookDto:
+      properties:
+        uuid:
+          type: string
+        id:
+          description: 'Идендификатор книги'
+          type: integer
+          example: '1'
+        title:
+          description: 'Название автора'
+          type: string
+          example: 'Руслан и Людмила'
+        author:
+          description: Aвторы
+          type: array
+          items:
+            type: string
+          example:
+            - 'Пушкин Александ Сергеевич'
+      type: object
+    BookSearchDto:
+      required:
+        - title
+      properties:
+        title:
+          description: 'Название автора'
+          type: string
+          maxLength: 255
+          example: 'Руслан и Людмила'
+      type: object
+tags:
+  -
+    name: Author
+    description: 'API для получения данных о авторе'
+  -
+    name: Book
+    description: 'API для получения данных о книге'

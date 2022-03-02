@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Author;
 
 use App\Dto\Request\Author\AuthorCreateDto;
-use App\Dto\Response\AuthorDto;
 use App\Entity\Author;
-use App\Factory\Response\AuthorFactory;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Creator

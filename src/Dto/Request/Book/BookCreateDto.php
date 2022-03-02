@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dto\Request\Book;
 
+use OpenApi\Annotations as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class BookCreateDto
@@ -12,6 +13,8 @@ class BookCreateDto
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      * @Assert\Length(max="255")
+     *
+     * @OA\Property(description="Название автора", example="Руслан и Людмила")
      */
     private string $title;
 
@@ -21,6 +24,8 @@ class BookCreateDto
      * @Assert\NotBlank()
      * @Assert\Type(type="array")
      * @Assert\Count(min=1)
+     *
+     * @OA\Property(description="Авторы", example={"Пушкин Александ Сергеевич"})
      */
     private array $authors;
 

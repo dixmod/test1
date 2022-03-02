@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service\Book;
 
 use App\Dto\Request\Book\BookSearchDto;
-use App\Dto\Response\BookDto;
 use App\Entity\Book;
 use App\Factory\Response\BookFactory;
 use App\Repository\BookRepository;

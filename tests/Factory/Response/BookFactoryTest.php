@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Factory\Response;
 
-use App\Dto\Response\AuthorDto;
-use App\Dto\Response\BookDto;
+use App\Dto\Response\Author\AuthorDto;
+use App\Dto\Response\Book\BookDto;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Factory\Response\BookFactory;

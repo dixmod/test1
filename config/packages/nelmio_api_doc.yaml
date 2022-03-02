@@ -1,0 +1,20 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      description: Описание API Test1
+      version: "1.0.0"
+      title: Order API
+    servers:
+      - description: stable
+        url: http://test1.dixmod.ru
+      - description: testing
+        url: http://test2.dixmod.ru
+    tags:
+      - name: Author
+        description: API для получения данных о авторе
+      - name: Book
+        description: API для получения данных о книге
+
+  areas:
+    path_patterns:
+      - ^\/((?!_error)(?!fubar).)*$

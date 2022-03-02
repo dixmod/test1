@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Service\Book;
 
 use App\Dto\Request\Book\BookCreateDto;
-use App\Dto\Response\AuthorDto;
-use App\Dto\Response\BookDto;
+use App\Dto\Response\Author\AuthorDto;
+use App\Dto\Response\Book\BookDto;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Service\Author\Creator as AuthorCreator;
